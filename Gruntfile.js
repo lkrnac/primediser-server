@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     // Project settings
     yeoman: {
       // configurable paths
-      dist: '../dist/server',
+      dist: 'dist',
       coverage: 'coverage',
       src: 'src',
       test: 'test'
@@ -144,7 +144,6 @@ module.exports = function (grunt) {
           expand: true,
           dest: '<%= yeoman.dist %>',
           src: [
-            'package.json',
             '<%= yeoman.src %>/**/*'
           ]
         }]
@@ -221,7 +220,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'express:prod', 'open', 'express-keepalive']);
+      return grunt.task.run(['build', 'express:prod', 'express-keepalive']);
     }
 
     grunt.task.run([
@@ -255,6 +254,8 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'express:dev'
+    'express:dev',
+    'clean:dist',
+    'copy:dist'
   ]);
 };
