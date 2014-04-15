@@ -19,7 +19,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
 
     // Project settings
-    yeoman: {
+    directory: {
       // configurable paths
       dist: 'dist',
       coverage: 'coverage',
@@ -32,27 +32,27 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: '<%= yeoman.src %>/server.js',
+          script: '<%= directory.src %>/server.js',
           debug: true
         }
       },
       prod: {
         options: {
-          script: '<%= yeoman.dist %>/server.js',
+          script: '<%= directory.dist %>/server.js',
           node_env: 'production'
         }
       }
     },
     watch: {
       jsServer: {
-        files: ['<%= yeoman.src %>/{,*/}*.js'],
+        files: ['<%= directory.src %>/{,*/}*.js'],
         tasks: ['mochaTest'],
         //        options: {
         //          livereload: true
         //        }
       },
       mochaTest: {
-        files: ['<%= yeoman.test %>/{,*/}*.js'],
+        files: ['<%= directory.test %>/{,*/}*.js'],
         tasks: ['mochaTest']
       },
       gruntfile: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
       },
       express: {
         files: [
-          '<%= yeoman.src %>/**/*.{js,json}'
+          '<%= directory.src %>/**/*.{js,json}'
         ],
         tasks: ['newer:jshint:server', 'express:dev', 'wait'],
         options: {
@@ -78,9 +78,9 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          jshintrc: '<%= yeoman.src %>/.jshintrc'
+          jshintrc: '<%= directory.src %>/.jshintrc'
         },
-        src: ['<%= yeoman.src %>/{,*/}*.js']
+        src: ['<%= directory.src %>/{,*/}*.js']
       }
     },
 
@@ -91,15 +91,15 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/*',
-            '!<%= yeoman.dist %>/.git*',
-            '!<%= yeoman.dist %>/Procfile'
+            '<%= directory.dist %>/*',
+            '!<%= directory.dist %>/.git*',
+            '!<%= directory.dist %>/Procfile'
           ]
         }]
       },
       server: '.tmp',
       coverage: {
-        src: ['<%= yeoman.coverage %>/']
+        src: ['<%= directory.coverage %>/']
       },
     },
 
@@ -115,7 +115,7 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: '<%= yeoman.src %>/server.js',
+        script: '<%= directory.src %>/server.js',
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
@@ -142,9 +142,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          dest: '<%= yeoman.dist %>',
+          dest: '<%= directory.dist %>',
           src: [
-            '<%= yeoman.src %>/**/*'
+            '<%= directory.src %>/**/*'
           ]
         }]
       },
@@ -154,30 +154,30 @@ module.exports = function (grunt) {
       options: {
         reporter: 'spec'
       },
-      src: ['<%= yeoman.test %>/**/*.js']
+      src: ['<%= directory.test %>/**/*.js']
     },
 
     // start - code coverage settings
 
     instrument: {
-      files: ['<%= yeoman.src %>/**/*.js'],
+      files: ['<%= directory.src %>/**/*.js'],
       options: {
         lazy: true,
-        basePath: '<%= yeoman.coverage %>/instrument/'
+        basePath: '<%= directory.coverage %>/instrument/'
       }
     },
 
     storeCoverage: {
       options: {
-        dir: '<%= yeoman.coverage %>/reports'
+        dir: '<%= directory.coverage %>/reports'
       }
     },
 
     makeReport: {
-      src: '<%= yeoman.coverage %>/reports/**/*.json',
+      src: '<%= directory.coverage %>/reports/**/*.json',
       options: {
         type: 'lcov',
-        dir: '<%= yeoman.coverage %>/reports',
+        dir: '<%= directory.coverage %>/reports',
         print: 'detail'
       }
     },
@@ -187,14 +187,14 @@ module.exports = function (grunt) {
         force: true
       },
       server: {
-        src: '<%= yeoman.coverage %>/reports/lcov.info'
+        src: '<%= directory.coverage %>/reports/lcov.info'
       },
     },
 
     // end - code coverage settings
     env: {
       coverage: {
-        APP_DIR_FOR_CODE_COVERAGE: '../<%= yeoman.coverage %>/instrument/'
+        APP_DIR_FOR_CODE_COVERAGE: '../<%= directory.coverage %>/instrument/'
       },
       test: {
         NODE_ENV: 'test'
