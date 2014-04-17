@@ -246,9 +246,9 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('test', [
-      'env:test',
-      'coverage',
-      'clean:server',
+    'env:test',
+    'coverage',
+    'clean:server',
   ]);
 
   grunt.registerTask('default', [
