@@ -2,12 +2,13 @@
 
 var express = require('express'),
   path = require('path'),
-  config = require('./config');
+  config = require('./config'),
+  favicon = require('static-favicon');
 
 /**
  * Express configuration
  */
-module.exports = function(app) {
+module.exports = function (app) {
   var env = process.env.NODE_ENV || 'development';
   if ('development' === env) {
     app.use(require('connect-livereload')());
@@ -30,7 +31,7 @@ module.exports = function(app) {
     app.use(require('errorhandler')());
 
   } else if ('production' === env) {
-    app.use(express.favicon(path.join(config.root, 'public', 'favicon.ico')));
+    app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
     app.set('views', config.root + '/views');
   }
