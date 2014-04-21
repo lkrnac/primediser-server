@@ -254,7 +254,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'copy:dist',
-    'express:dist'
+    'express:prod'
   ]);
 
   grunt.registerTask('default', [
