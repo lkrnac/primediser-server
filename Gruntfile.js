@@ -251,11 +251,16 @@ module.exports = function (grunt) {
     'clean:server',
   ]);
 
+  grunt.registerTask('build', [
+    'clean:dist',
+    'copy:dist',
+    'express:dist'
+  ]);
+
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
     'express:dev',
-    'clean:dist',
-    'copy:dist'
+    'build'
   ]);
 };
