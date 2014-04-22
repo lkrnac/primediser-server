@@ -141,10 +141,11 @@ module.exports = function (grunt) {
     copy: {
       dist: {
         files: [{
+          cwd: '<%= directory.src %>',
           expand: true,
           dest: '<%= directory.dist %>',
           src: [
-            '<%= directory.src %>/**/*'
+            '**/*'
           ]
         }]
       },
@@ -260,7 +261,6 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'express:dev',
     'build'
   ]);
 };
