@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     // Project settings
     directory: {
       // configurable paths
-      dist: 'dist',
+      dist: 'dist/server',
       coverage: 'coverage',
       src: 'src',
       test: 'test'
@@ -255,7 +255,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'copy:dist',
-    'express:prod'
+    //'express:prod'
   ]);
 
   grunt.registerTask('default', [
