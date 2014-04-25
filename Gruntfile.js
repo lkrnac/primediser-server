@@ -221,13 +221,18 @@ module.exports = function (grunt) {
 
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'express:prod', 'express-keepalive']);
+      return grunt.task.run([
+        'build',
+        'express:prod',
+        'express-keepalive',
+      ]);
     }
 
     grunt.task.run([
       'clean:server',
       'express:dev',
-      'watch'
+      'watch',
+      'express:dev:stop',
     ]);
   });
 
@@ -255,7 +260,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'copy:dist',
-    //'express:prod'
+    'express:prod',
+    'express:prod:stop'
   ]);
 
   grunt.registerTask('default', [
